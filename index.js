@@ -6,21 +6,13 @@ const port = 4000
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
 app.use(express.urlencoded())
+app.use(express.static('assets'))
 
 var contactList = [ {
         name: "arpit",
         phone: "7488552785"
-    },
-    {
-        name:"babita",
-        phone: "2349832483"
-
-    },
-    {
-        name: "rita",
-        phone: "34242342343"
-        
-    }]
+    }
+]
 
 app.get('/' , (req,res) => {
     return res.render('home',{
@@ -34,6 +26,17 @@ app.get('/practice',(req,res) => {
     return res.render('practice',{
         title:'playground'
     })
+})
+
+app.get('/delete-contact',(req,res) => {
+    let phone = req.query.phone
+    let contactIndex = contactList.findIndex(contact => contact.phone == phone)
+
+    if(contactIndex != -1){
+        contactList.splice(contactIndex,1)
+    }
+    return res.redirect('back')
+
 })
 
 app.post('/create_contact', (req,res) => {

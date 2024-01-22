@@ -3,28 +3,43 @@
         <title>
             <%=title %>
         </title>
+        <script src="https://kit.fontawesome.com/9b8480c442.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/home.css">
     </head>
     <body>
-            <h1>contact list</h1>
+        <div class="container">
+            <h1><i class="fa-solid fa-book"></i> My Contact List</h1>
             
-            <div>
+            
+                
                 <ul>
                     <% for(let i of contact_list) { %>
                         <li>
-                            <%= i.name %>
-                            <%= i.phone %>
+                            <i class="fa-regular fa-user"></i>
+                            
+                            <span class="contact-name"><%= i.name %></span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="contact-phone"><%= i.phone %></span>
+                           
+                            <div class="delete-button">
+                                <a href="/delete-contact/?phone=<%= i.phone %>">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>                   
                         </li>
                         <% } %>
                 </ul>
                 
-            </div>
+          
 
             <form action="/create_contact"  method="POST">
                 <input type="text" name="name" placeholder="Enter name" required>
                 <input type="number" name="phone" placeholder="Enter phonenumber" required>
                 <button type="submit">Add contacts</button>
             </form>
-
-
+        </div>
+            
+            <script type="text/javascript" src="/js/home.js"></script>
+            
     </body>
+    
 </html>
